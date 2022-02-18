@@ -1,0 +1,10 @@
+﻿# Visual Studio
+.vs
+*.user
+
+# Rider
+.idea
+
+# Binaries
+**/obj
+**/bin
