@@ -5,6 +5,33 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Unsafe", "Becometrica.Unsafe\Becometrica.Unsafe.csproj", "{8167FFB4-2772-4B46-9FE2-E3D028DED28D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Parsing", "Becometrica.Parsing\Becometrica.Parsing.csproj", "{019844F8-FF94-485A-90E5-A3D37D6BD991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E1474DC-B19B-4581-8475-04CCC0AB3625}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Parsing.Tests", "Tests\Becometrica.Parsing.Tests\Becometrica.Parsing.Tests.csproj", "{E4145B42-F45C-451C-8D24-6039333118F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Math", "Becometrica.Math\Becometrica.Math.csproj", "{14B9FFF8-29D9-49A0-864A-F293BA631E42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{9B33887C-66A6-408D-8EAA-56703317B076}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Math.Tests", "Tests\Becometrica.Math.Tests\Becometrica.Math.Tests.csproj", "{DAD4EE48-28D7-4986-A9A2-FEC516FAEADB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{757094C0-16EF-4B21-BDA4-A0CA93973972}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Benchmarks", "Benchmarks\Becometrica.Benchmarks\Becometrica.Benchmarks.csproj", "{617CF349-D757-4CE1-B5D8-7D4B9859ACF6}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Becometrica.Math.Symbolic", "Becometrica.Math.Symbolic\Becometrica.Math.Symbolic.fsproj", "{323CEFE3-3B66-4B8E-A5AC-5D7CB14CC1CD}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Becometrica.Math.Symbolic.Tests", "Tests\Becometrica.Math.Symbolic.Tests\Becometrica.Math.Symbolic.Tests.fsproj", "{EAE4B03C-27A2-4990-AB9E-00F2F2DAA65C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Math.Multiprecision", "Becometrica.Math.Multiprecision\Becometrica.Math.Multiprecision.csproj", "{DC6FCD80-E493-49E9-9BA9-BAAECF7BF82C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Becometrica.Math.Multiprecision.Tests", "Tests\Becometrica.Math.Multiprecision.Tests\Becometrica.Math.Multiprecision.Tests.csproj", "{F9CCE1D9-EA1C-4DDE-8A71-0A7977B0807B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +45,48 @@ Global
 		{8167FFB4-2772-4B46-9FE2-E3D028DED28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8167FFB4-2772-4B46-9FE2-E3D028DED28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8167FFB4-2772-4B46-9FE2-E3D028DED28D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{019844F8-FF94-485A-90E5-A3D37D6BD991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{019844F8-FF94-485A-90E5-A3D37D6BD991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{019844F8-FF94-485A-90E5-A3D37D6BD991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{019844F8-FF94-485A-90E5-A3D37D6BD991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4145B42-F45C-451C-8D24-6039333118F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4145B42-F45C-451C-8D24-6039333118F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4145B42-F45C-451C-8D24-6039333118F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4145B42-F45C-451C-8D24-6039333118F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B9FFF8-29D9-49A0-864A-F293BA631E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B9FFF8-29D9-49A0-864A-F293BA631E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B9FFF8-29D9-49A0-864A-F293BA631E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B9FFF8-29D9-49A0-864A-F293BA631E42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAD4EE48-28D7-4986-A9A2-FEC516FAEADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAD4EE48-28D7-4986-A9A2-FEC516FAEADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAD4EE48-28D7-4986-A9A2-FEC516FAEADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAD4EE48-28D7-4986-A9A2-FEC516FAEADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{617CF349-D757-4CE1-B5D8-7D4B9859ACF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{617CF349-D757-4CE1-B5D8-7D4B9859ACF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{617CF349-D757-4CE1-B5D8-7D4B9859ACF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{617CF349-D757-4CE1-B5D8-7D4B9859ACF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323CEFE3-3B66-4B8E-A5AC-5D7CB14CC1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323CEFE3-3B66-4B8E-A5AC-5D7CB14CC1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323CEFE3-3B66-4B8E-A5AC-5D7CB14CC1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323CEFE3-3B66-4B8E-A5AC-5D7CB14CC1CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAE4B03C-27A2-4990-AB9E-00F2F2DAA65C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAE4B03C-27A2-4990-AB9E-00F2F2DAA65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAE4B03C-27A2-4990-AB9E-00F2F2DAA65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAE4B03C-27A2-4990-AB9E-00F2F2DAA65C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6FCD80-E493-49E9-9BA9-BAAECF7BF82C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6FCD80-E493-49E9-9BA9-BAAECF7BF82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6FCD80-E493-49E9-9BA9-BAAECF7BF82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6FCD80-E493-49E9-9BA9-BAAECF7BF82C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9CCE1D9-EA1C-4DDE-8A71-0A7977B0807B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CCE1D9-EA1C-4DDE-8A71-0A7977B0807B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CCE1D9-EA1C-4DDE-8A71-0A7977B0807B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CCE1D9-EA1C-4DDE-8A71-0A7977B0807B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4145B42-F45C-451C-8D24-6039333118F3} = {7E1474DC-B19B-4581-8475-04CCC0AB3625}
+		{DAD4EE48-28D7-4986-A9A2-FEC516FAEADB} = {7E1474DC-B19B-4581-8475-04CCC0AB3625}
+		{617CF349-D757-4CE1-B5D8-7D4B9859ACF6} = {757094C0-16EF-4B21-BDA4-A0CA93973972}
+		{EAE4B03C-27A2-4990-AB9E-00F2F2DAA65C} = {7E1474DC-B19B-4581-8475-04CCC0AB3625}
+		{F9CCE1D9-EA1C-4DDE-8A71-0A7977B0807B} = {7E1474DC-B19B-4581-8475-04CCC0AB3625}
 	EndGlobalSection
 EndGlobal
