@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Xunit;
 
@@ -62,5 +63,58 @@ public class MpIntegerTests
 
         // Assert
         result.Should().BeTrue();
+    }
+
+    [Theory]
+    [InlineData(1, 1, 1, 0)]
+    [InlineData(49, 7, 7, 0)]
+    [InlineData(49, -7, -7, 0)]
+    [InlineData(-49, 7, -7, 0)]
+    [InlineData(-49, -7, 7, 0)]
+    [InlineData(50, 7, 7, 1)]
+    [InlineData(50, -7, -7, 1)]
+    [InlineData(-50, 7, -7, -1)]
+    [InlineData(-50, -7, 7, -1)]
+    public void Division(int dividend, int divisor, int quotient, int remainder)
+    {
+        // Arrange
+        using MpInteger a = dividend;
+        using MpInteger b = divisor;
+        using MpInteger q = quotient;
+        using MpInteger r = remainder;
+
+        // Act & Assert
+        (a / b).Should().Be(q);
+        (a % b).Should().Be(r);
+
+        (a / divisor).Should().Be(q);
+        (a % divisor).Should().Be(r);
+
+        MpInteger.Divide(a, b).Should().Be(q);
+        MpInteger.Remainder(a, b).Should().Be(r);
+
+        MpInteger.Divide(a, divisor).Should().Be(q);
+        MpInteger.Remainder(a, divisor).Should().Be(r);
+
+        MpInteger.DivRem(a, b).Should().Be((q, r));
+        MpInteger.DivRem(a, divisor).Should().Be((q, r));
+    }
+
+    [Fact]
+    public void DivisionByZero()
+    {
+        // Arrange
+        using MpInteger a = 10;
+        using MpInteger b = 0;
+        Func<MpInteger> div = () => a / b;
+        Func<MpInteger> rem = () => a % b;
+        Func<MpInteger> div2 = () => a / 0;
+        Func<MpInteger> rem2 = () => a % 0;
+
+        // Act & Assert
+        div.Should().Throw<DivideByZeroException>();
+        rem.Should().Throw<DivideByZeroException>();
+        div2.Should().Throw<DivideByZeroException>();
+        rem2.Should().Throw<DivideByZeroException>();
     }
 }
