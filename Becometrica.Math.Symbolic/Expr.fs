@@ -55,8 +55,8 @@ type Expr =
     /// The imaginary unit or unit imaginary number (i) is a solution to the quadratic equation x^2 + 1 = 0.
     | I
 
-    | IntegerExpr of bigint
-    | RationalExpr of numerator: bigint * denominator: bigint
+    | IntegerExpr of MpInteger
+    | RationalExpr of MpRational
     | ConstantExpr of constant: Constant
     | ComplexExpr of real: Expr * imaginary: Expr
 
@@ -73,9 +73,9 @@ type Expr =
 
     | FunctionExpr of fn: Function * args: Expr list
 
-    static member Zero = IntegerExpr 0I
-    static member One = IntegerExpr 1I
-    static member MinusOne = IntegerExpr -1I
+    static member Zero = IntegerExpr 0Z
+    static member One = IntegerExpr 1Z
+    static member MinusOne = IntegerExpr -1Z
 
     static member (~+) (value: Expr) = value
     static member (~-) value = NegateExpr value
@@ -88,12 +88,12 @@ type Expr =
     static member Pow(``base``, exponent) = PowerExpr(``base``, exponent)
     static member Factorial value = FactorialExpr value
 
-    static member OfInteger(integer: int) = integer |> bigint |> IntegerExpr
-    static member OfInteger(integer: uint) = integer |> bigint |> IntegerExpr
-    static member OfInteger(integer: int64) = integer |> bigint |> IntegerExpr
-    static member OfInteger(integer: uint64) = integer |> bigint |> IntegerExpr
-    static member OfInteger(integer: bigint) = IntegerExpr integer
-    static member OfRational(numerator, denominator) = RationalExpr(numerator, denominator)
+    static member OfInteger(integer: int) = new MpInteger(integer) |> IntegerExpr
+    static member OfInteger(integer: uint) = new MpInteger(integer) |> IntegerExpr
+    static member OfInteger(integer: int64) = new MpInteger(integer) |> IntegerExpr
+    static member OfInteger(integer: uint64) = new MpInteger(integer) |> IntegerExpr
+    static member OfInteger(integer: MpInteger) = IntegerExpr integer
+    static member OfRational(numerator: MpInteger, denominator) = RationalExpr(new MpRational(numerator, denominator))
     static member OfComplex(real, imaginary) = ComplexExpr(real, imaginary)
     static member OfConstant constant = ConstantExpr constant
     static member OfDouble double =
@@ -115,7 +115,7 @@ type Expr =
             if scale = 0 then
                 result
             else
-                result * ((Expr.OfInteger 10I) ** (Expr.OfInteger scale))
+                result * ((Expr.OfInteger 10Z) ** (Expr.OfInteger scale))
 
     static member OfFloat(float: single) = float |> double |> Expr.OfDouble
     static member OfDecimal decimal =
@@ -124,7 +124,7 @@ type Expr =
         if scale = 0 then
             result
         else
-            result / ((Expr.OfInteger 10I) ** (Expr.OfInteger scale))
+            result / ((Expr.OfInteger 10Z) ** (Expr.OfInteger scale))
 
     static member OfComplex(complex: Complex) =
         ComplexExpr(complex.Real |> Expr.OfDouble, complex.Imaginary |> Expr.OfDouble)
@@ -138,7 +138,7 @@ type Expr =
     static member op_Implicit(integer: uint) = Expr.OfInteger integer
     static member op_Implicit(integer: int64) = Expr.OfInteger integer
     static member op_Implicit(integer: uint64) = Expr.OfInteger integer
-    static member op_Implicit(integer: bigint) = Expr.OfInteger integer
+    static member op_Implicit(integer: MpInteger) = Expr.OfInteger integer
     static member op_Implicit constant = Expr.OfConstant constant
     static member op_Implicit float = Expr.OfFloat float
     static member op_Implicit double = Expr.OfDouble double
@@ -166,7 +166,7 @@ type Expr =
         | E -> sb.Append "#e" |> ignore
         | I -> sb.Append "#i" |> ignore
         | IntegerExpr integer ->
-            if integer < 0I then
+            if integer < 0Z then
                 Expr.ConvertToString sb -(Expr.OfInteger -integer) priority associative
             else
                 sb.Append (integer.ToString CultureInfo.InvariantCulture) |> ignore

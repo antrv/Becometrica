@@ -1522,6 +1522,68 @@ internal static class Mpir
     internal static extern int mpz_tstbit(in Mpz op, nuint bitIndex);
 
     /// <summary>
+    /// Set rop from an array of word data at op.
+    ///
+    /// The parameters specify the format of the data. count many words are read, each size bytes.
+    /// order can be 1 for most significant word first or -1 for least significant first. Within each
+    /// word endian can be 1 for most significant byte first, -1 for least significant first, or 0 for the
+    /// native endianness of the host CPU. The most significant nails bits of each word are skipped,
+    /// this can be 0 to use the full words.
+    /// There is no sign taken from the data, rop will simply be a positive integer. An application
+    /// can handle any sign itself, and apply it for instance with mpz_neg.
+    /// There are no data alignment restrictions on op, any address is allowed.
+    /// </summary>
+    /// <param name="rop"></param>
+    /// <param name="count"></param>
+    /// <param name="order"></param>
+    /// <param name="size"></param>
+    /// <param name="endian"></param>
+    /// <param name="nails"></param>
+    /// <param name="op"></param>
+    [DllImport(LibraryName, EntryPoint = Prefix + nameof(mpz_import))]
+    internal static extern void mpz_import(ref Mpz rop, nuint count, int order, nuint size, int endian, nuint nails,
+        ConstPtr<byte> op);
+
+    /// <summary>
+    /// Fill rop with word data from op.
+    ///
+    /// The parameters specify the format of the data produced. Each word will be size bytes and
+    /// order can be 1 for most significant word first or -1 for least significant first. Within each
+    /// word endian can be 1 for most significant byte first, -1 for least significant first, or 0 for the
+    /// native endianness of the host CPU. The most significant nails bits of each word are unused
+    ///
+    /// The number of words produced is written to *countp, or countp can be NULL to discard the
+    /// count. rop must have enough space for the data, or if rop is NULL then a result array of
+    /// the necessary size is allocated using the current MPIR allocation function (see Chapter 14
+    /// [Custom Allocation], page 106). In either case the return value is the destination used, either
+    /// rop or the allocated block.
+    ///
+    /// If op is non-zero then the most significant word produced will be non-zero. If op is zero then
+    /// the count returned will be zero and nothing written to rop. If rop is NULL in this case, no
+    /// block is allocated, just NULL is returned.
+    ///
+    /// The sign of op is ignored, just the absolute value is exported. An application can use mpz_sgn
+    /// to get the sign and handle it as desired. (see Section 5.10 [Integer Comparisons], page 39)
+    ///
+    /// There are no data alignment restrictions on rop, any address is allowed.
+    ///
+    /// When an application is allocating space itself the required size can be determined with a
+    /// calculation like the following. Since mpz_sizeinbase always returns at least 1, count here
+    /// will be at least one, which avoids any portability problems with malloc(0), though if z is
+    /// zero no space at all is actually needed (or written).and set to zero, this can be 0 to produce full words.
+    /// </summary>
+    /// <param name="rop"></param>
+    /// <param name="count"></param>
+    /// <param name="order"></param>
+    /// <param name="size"></param>
+    /// <param name="endian"></param>
+    /// <param name="nails"></param>
+    /// <param name="op"></param>
+    [DllImport(LibraryName, EntryPoint = Prefix + nameof(mpz_export))]
+    internal static extern Ptr<byte> mpz_export(Ptr<byte> rop, out nuint count, int order, nuint size, int endian,
+        nuint nails, in Mpz op);
+
+    /// <summary>
     /// Return non-zero iff the value of op fits in an unsigned long, long, unsigned int, signed
     /// int, unsigned short int, or signed short int, respectively. Otherwise, return zero.
     /// </summary>

@@ -18,7 +18,14 @@ partial struct MpInteger
     public static int Compare(MpInteger a, nint b) => Mpir.mpz_cmp_si(a.Z, b);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(MpInteger a, long b) => IntPtr.Size == 8 ? Compare(a, (nint)b) : Compare(a, (MpInteger)b);
+    public static int Compare(MpInteger a, long b)
+    {
+        if (IntPtr.Size == 8)
+            return Compare(a, (nint)b);
+
+        using MpInteger temp = b;
+        return Compare(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Compare(MpInteger a, uint b) => Compare(a, (nuint)b);
@@ -27,8 +34,14 @@ partial struct MpInteger
     public static int Compare(MpInteger a, nuint b) => Mpir.mpz_cmp_ui(a.Z, b);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(MpInteger a, ulong b) =>
-        IntPtr.Size == 8 ? Compare(a, (nuint)b) : Compare(a, (MpInteger)b);
+    public static int Compare(MpInteger a, ulong b)
+    {
+        if (IntPtr.Size == 8)
+            return Compare(a, (nuint)b);
+
+        using MpInteger temp = b;
+        return Compare(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(MpInteger a, MpInteger b) => Compare(a, b) == 0;
@@ -313,8 +326,14 @@ partial struct MpInteger
     public static int CompareAbs(MpInteger a, nuint b) => Mpir.mpz_cmpabs_ui(a.Z, b);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int CompareAbs(MpInteger a, ulong b) =>
-        IntPtr.Size == 8 ? CompareAbs(a, (nuint)b) : CompareAbs(a, (MpInteger)b);
+    public static int CompareAbs(MpInteger a, ulong b)
+    {
+        if (IntPtr.Size == 8)
+            return CompareAbs(a, (nuint)b);
+
+        using MpInteger temp = b;
+        return CompareAbs(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int Sign() => Mpir.mpz_sgn(Z);

@@ -18,7 +18,14 @@ partial struct MpFloat
     public static int Compare(MpFloat a, nint b) => Mpir.mpf_cmp_si(a.F, b);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(MpFloat a, long b) => IntPtr.Size == 8 ? Compare(a, (nint)b) : Compare(a, (MpFloat)b);
+    public static int Compare(MpFloat a, long b)
+    {
+        if (IntPtr.Size == 8)
+            return Compare(a, (nint)b);
+
+        using MpFloat temp = b;
+        return Compare(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Compare(MpFloat a, uint b) => Compare(a, (nuint)b);
@@ -27,8 +34,14 @@ partial struct MpFloat
     public static int Compare(MpFloat a, nuint b) => Mpir.mpf_cmp_ui(a.F, b);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(MpFloat a, ulong b) =>
-        IntPtr.Size == 8 ? Compare(a, (nuint)b) : Compare(a, (MpFloat)b);
+    public static int Compare(MpFloat a, ulong b)
+    {
+        if (IntPtr.Size == 8)
+            return Compare(a, (nuint)b);
+
+        using MpFloat temp = b;
+        return Compare(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(MpFloat a, MpFloat b) => Compare(a, b) == 0;

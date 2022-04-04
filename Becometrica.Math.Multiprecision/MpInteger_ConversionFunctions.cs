@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Numerics;
+using System.Runtime.CompilerServices;
 using Becometrica.Math.Interop;
 
 namespace Becometrica.Math;
@@ -44,6 +45,22 @@ partial struct MpInteger
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public long ToInt64() => Mpir.mpz_get_sx(Z);
+
+    public BigInteger ToBigInteger()
+    {
+        if (_z is null)
+            return BigInteger.Zero;
+
+        nuint byteCount = 2 + Mpir.mpz_sizeinbase(_z.Value, 16) / 2;
+        if (byteCount > int.MaxValue)
+            throw new OverflowException();
+
+        Span<byte> buffer = byteCount > 512 ? new byte[byteCount] : stackalloc byte[(int)byteCount];
+        Ptr<byte> ptr = Ptr.FromRef(ref buffer[0]);
+        Mpir.mpz_export(ptr, out nuint count, -1, 1, -1, 0, _z.Value);
+        BigInteger value = new(buffer[..(int)count], true);
+        return Sign() >= 0 ? value : -value;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public double ToDouble() => Mpir.mpz_get_d(Z);

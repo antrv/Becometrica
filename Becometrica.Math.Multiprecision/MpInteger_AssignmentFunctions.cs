@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Numerics;
+using System.Runtime.CompilerServices;
 using Becometrica.Math.Interop;
 
 namespace Becometrica.Math;
@@ -25,6 +26,23 @@ partial struct MpInteger
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Set(ulong value) => Mpir.mpz_set_ux(ref (_z ??= new()).Value, value);
+
+    public void Set(BigInteger value)
+    {
+        bool isNegative = value.Sign < 0;
+        if (isNegative)
+            value = -value;
+
+        int byteCount = value.GetByteCount(true);
+        Span<byte> buffer = byteCount > 512 ? new byte[byteCount] : stackalloc byte[byteCount];
+        if (!value.TryWriteBytes(buffer, out int bytesWritten, true))
+            throw new InternalBufferOverflowException(); // should not happen
+
+        ConstPtr<byte> ptr = Ptr.FromRef(ref buffer[0]);
+        Mpir.mpz_import(ref (_z ??= new()).Value, (nuint)byteCount, -1, 1, -1, 0, ptr);
+        if (isNegative)
+            Mpir.mpz_neg(ref _z.Value, _z.Value);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Set(double value) => Mpir.mpz_set_d(ref (_z ??= new()).Value, value);

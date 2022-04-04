@@ -59,10 +59,24 @@ partial struct MpFloat
     public nint ToNativeInt() => Mpir.mpf_get_si(F);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public ulong ToUInt64() => IntPtr.Size == 8 ? Mpir.mpf_get_ui(F) : ToInteger().ToUInt64();
+    public ulong ToUInt64()
+    {
+        if (IntPtr.Size == 8)
+            return Mpir.mpf_get_ui(F);
+
+        using MpInteger temp = ToInteger();
+        return temp.ToUInt64();
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public long ToInt64() => IntPtr.Size == 8 ? Mpir.mpf_get_si(F) : ToInteger().ToInt64();
+    public long ToInt64()
+    {
+        if (IntPtr.Size == 8)
+            return Mpir.mpf_get_si(F);
+
+        using MpInteger temp = ToInteger();
+        return temp.ToInt64();
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public double ToDouble() => Mpir.mpf_get_d(F);

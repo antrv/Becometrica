@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using FluentAssertions;
 using Xunit;
 
@@ -116,5 +117,24 @@ public class MpIntegerTests
         rem.Should().Throw<DivideByZeroException>();
         div2.Should().Throw<DivideByZeroException>();
         rem2.Should().Throw<DivideByZeroException>();
+    }
+
+    [Fact]
+    public void ConversionToAndFromBigInteger()
+    {
+        // Arrange
+        BigInteger zero = BigInteger.Zero;
+        BigInteger sevenPow100 = BigInteger.Pow(7, 100);
+        BigInteger negativeSevenPow100 = -sevenPow100;
+
+        // Act
+        MpInteger zeroMp = zero;
+        MpInteger sevenPow100Mp = sevenPow100;
+        MpInteger negativeSevenPow100Mp = negativeSevenPow100;
+
+        // Assert
+        zeroMp.ToBigInteger().Should().Be(zero);
+        sevenPow100Mp.ToBigInteger().Should().Be(sevenPow100);
+        negativeSevenPow100Mp.ToBigInteger().Should().Be(negativeSevenPow100);
     }
 }

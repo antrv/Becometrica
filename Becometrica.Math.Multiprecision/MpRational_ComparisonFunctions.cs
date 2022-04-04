@@ -23,9 +23,14 @@ partial struct MpRational
         Mpir.mpq_cmp_si(a.Q, numerator, denominator);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(MpRational a, long numerator, ulong denominator) => IntPtr.Size == 8
-        ? Compare(a, (nint)numerator, (nuint)denominator)
-        : Compare(a, new MpRational(numerator, denominator));
+    public static int Compare(MpRational a, long numerator, ulong denominator)
+    {
+        if (IntPtr.Size == 8)
+            return Compare(a, (nint)numerator, (nuint)denominator);
+
+        using MpRational temp = new(numerator, denominator);
+        return Compare(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int Compare(MpRational a, uint numerator, uint denominator) =>
@@ -36,9 +41,14 @@ partial struct MpRational
         Mpir.mpq_cmp_ui(a.Q, numerator, denominator);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Compare(MpRational a, ulong numerator, ulong denominator) => IntPtr.Size == 8
-        ? Compare(a, (nuint)numerator, (nuint)denominator)
-        : Compare(a, new MpRational(numerator, denominator));
+    public static int Compare(MpRational a, ulong numerator, ulong denominator)
+    {
+        if (IntPtr.Size == 8)
+            return Compare(a, (nuint)numerator, (nuint)denominator);
+
+        using MpRational temp = new(numerator, denominator);
+        return Compare(a, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool operator ==(MpRational a, MpRational b) => Equals(a, b);

@@ -87,12 +87,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Add(ref result, operand1, (nuint)operand2);
         else
-            Add(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Add(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Add(MpFloat operand1, ulong operand2) =>
-        IntPtr.Size == 8 ? Add(operand1, (nuint)operand2) : Add(operand1, (MpFloat)operand2);
+    public static MpFloat Add(MpFloat operand1, ulong operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Add(operand1, (nuint)operand2);
+
+        using MpFloat temp = operand2;
+        return Add(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Add(ref MpFloat result, MpFloat operand1, long operand2)
@@ -100,12 +109,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Add(ref result, operand1, (nint)operand2);
         else
-            Add(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Add(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Add(MpFloat operand1, long operand2) =>
-        IntPtr.Size == 8 ? Add(operand1, (nint)operand2) : Add(operand1, (MpFloat)operand2);
+    public static MpFloat Add(MpFloat operand1, long operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Add(operand1, (nint)operand2);
+
+        using MpFloat temp = operand2;
+        return Add(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Subtract(ref MpFloat result, MpFloat operand1, MpFloat operand2) =>
@@ -190,12 +208,21 @@ partial struct MpFloat
         if (operand1 >= 0)
             Subtract(ref result, (nuint)operand1, operand2);
         else
-            Subtract(ref result, (MpFloat)operand1, operand2);
+        {
+            using MpFloat temp = operand1;
+            Subtract(ref result, temp, operand2);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Subtract(nint operand1, MpFloat operand2) =>
-        operand1 >= 0 ? Subtract((nuint)operand1, operand2) : Subtract((MpFloat)operand1, operand2);
+    public static MpFloat Subtract(nint operand1, MpFloat operand2)
+    {
+        if (operand1 >= 0)
+            return Subtract((nuint)operand1, operand2);
+
+        using MpFloat temp = operand1;
+        return Subtract(temp, operand2);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Subtract(ref MpFloat result, MpFloat operand1, ulong operand2)
@@ -203,12 +230,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Subtract(ref result, operand1, (nuint)operand2);
         else
-            Subtract(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Subtract(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Subtract(MpFloat operand1, ulong operand2) =>
-        IntPtr.Size == 8 ? Subtract(operand1, (nuint)operand2) : Subtract(operand1, (MpFloat)operand2);
+    public static MpFloat Subtract(MpFloat operand1, ulong operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Subtract(operand1, (nuint)operand2);
+
+        using MpFloat temp = operand2;
+        return Subtract(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Subtract(ref MpFloat result, ulong operand1, MpFloat operand2)
@@ -216,12 +252,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Subtract(ref result, (nuint)operand1, operand2);
         else
-            Subtract(ref result, (MpFloat)operand1, operand2);
+        {
+            using MpFloat temp = operand1;
+            Subtract(ref result, temp, operand2);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Subtract(ulong operand1, MpFloat operand2) =>
-        IntPtr.Size == 8 ? Subtract((nuint)operand1, operand2) : Subtract((MpFloat)operand1, operand2);
+    public static MpFloat Subtract(ulong operand1, MpFloat operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Subtract((nuint)operand1, operand2);
+
+        using MpFloat temp = operand1;
+        return Subtract(temp, operand2);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Subtract(ref MpFloat result, MpFloat operand1, long operand2)
@@ -229,12 +274,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Subtract(ref result, operand1, (nint)operand2);
         else
-            Subtract(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Subtract(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Subtract(MpFloat operand1, long operand2) =>
-        IntPtr.Size == 8 ? Subtract(operand1, (nint)operand2) : Subtract(operand1, (MpFloat)operand2);
+    public static MpFloat Subtract(MpFloat operand1, long operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Subtract(operand1, (nint)operand2);
+
+        using MpFloat temp = operand2;
+        return Subtract(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Subtract(ref MpFloat result, long operand1, MpFloat operand2)
@@ -242,12 +296,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Subtract(ref result, (nint)operand1, operand2);
         else
-            Subtract(ref result, (MpFloat)operand1, operand2);
+        {
+            using MpFloat temp = operand1;
+            Subtract(ref result, temp, operand2);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Subtract(long operand1, MpFloat operand2) =>
-        IntPtr.Size == 8 ? Subtract((nint)operand1, operand2) : Subtract((MpFloat)operand1, operand2);
+    public static MpFloat Subtract(long operand1, MpFloat operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Subtract((nint)operand1, operand2);
+
+        using MpFloat temp = operand1;
+        return Subtract(temp, operand2);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Multiply(ref MpFloat result, MpFloat operand1, MpFloat operand2) =>
@@ -293,12 +356,19 @@ partial struct MpFloat
         if (operand2 >= 0)
             Multiply(ref result, operand1, (nuint)operand2);
         else
-            Multiply(ref result, operand1, (MpFloat)operand2);
+        {
+            Multiply(ref result, operand1, (nuint)(-operand2));
+            Negate(ref result, result);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Multiply(MpFloat operand1, nint operand2) =>
-        operand2 >= 0 ? Multiply(operand1, (nuint)operand2) : Multiply(operand1, (MpFloat)operand2);
+    public static MpFloat Multiply(MpFloat operand1, nint operand2)
+    {
+        MpFloat result = default;
+        Multiply(ref result, operand1, operand2);
+        return result;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Multiply(ref MpFloat result, MpFloat operand1, ulong operand2)
@@ -306,12 +376,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Multiply(ref result, operand1, (nuint)operand2);
         else
-            Multiply(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Multiply(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Multiply(MpFloat operand1, ulong operand2) =>
-        IntPtr.Size == 8 ? Multiply(operand1, (nuint)operand2) : Multiply(operand1, (MpFloat)operand2);
+    public static MpFloat Multiply(MpFloat operand1, ulong operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Multiply(operand1, (nuint)operand2);
+
+        using MpFloat temp = operand2;
+        return Multiply(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Multiply(ref MpFloat result, MpFloat operand1, long operand2)
@@ -319,12 +398,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Multiply(ref result, operand1, (nint)operand2);
         else
-            Multiply(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Multiply(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Multiply(MpFloat operand1, long operand2) =>
-        IntPtr.Size == 8 ? Multiply(operand1, (nint)operand2) : Multiply(operand1, (MpFloat)operand2);
+    public static MpFloat Multiply(MpFloat operand1, long operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Multiply(operand1, (nint)operand2);
+
+        using MpFloat temp = operand2;
+        return Multiply(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpFloat result, MpFloat operand1, MpFloat operand2) =>
@@ -396,12 +484,21 @@ partial struct MpFloat
         if (operand2 >= 0)
             Divide(ref result, operand1, (nuint)operand2);
         else
-            Divide(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Divide(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Divide(MpFloat operand1, nint operand2) =>
-        operand2 >= 0 ? Divide(operand1, (nuint)operand2) : Divide(operand1, (MpFloat)operand2);
+    public static MpFloat Divide(MpFloat operand1, nint operand2)
+    {
+        if (operand2 >= 0)
+            return Divide(operand1, (nuint)operand2);
+
+        using MpFloat temp = operand2;
+        return Divide(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpFloat result, nint operand1, MpFloat operand2)
@@ -409,12 +506,21 @@ partial struct MpFloat
         if (operand1 >= 0)
             Divide(ref result, (nuint)operand1, operand2);
         else
-            Divide(ref result, (MpFloat)operand1, operand2);
+        {
+            using MpFloat temp = operand1;
+            Divide(ref result, temp, operand2);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Divide(nint operand1, MpFloat operand2) =>
-        operand1 >= 0 ? Divide((nuint)operand1, operand2) : Subtract((MpFloat)operand1, operand2);
+    public static MpFloat Divide(nint operand1, MpFloat operand2)
+    {
+        if (operand1 >= 0)
+            return Divide((nuint)operand1, operand2);
+
+        using MpFloat temp = operand1;
+        return Divide(temp, operand2);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpFloat result, MpFloat operand1, ulong operand2)
@@ -422,12 +528,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Divide(ref result, operand1, (nuint)operand2);
         else
-            Divide(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Divide(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Divide(MpFloat operand1, ulong operand2) =>
-        IntPtr.Size == 8 ? Divide(operand1, (nuint)operand2) : Divide(operand1, (MpFloat)operand2);
+    public static MpFloat Divide(MpFloat operand1, ulong operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Divide(operand1, (nuint)operand2);
+
+        using MpFloat temp = operand2;
+        return Divide(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpFloat result, ulong operand1, MpFloat operand2)
@@ -435,12 +550,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Divide(ref result, (nuint)operand1, operand2);
         else
-            Divide(ref result, (MpFloat)operand1, operand2);
+        {
+            using MpFloat temp = operand1;
+            Divide(ref result, temp, operand2);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Divide(ulong operand1, MpFloat operand2) =>
-        IntPtr.Size == 8 ? Divide((nuint)operand1, operand2) : Divide((MpFloat)operand1, operand2);
+    public static MpFloat Divide(ulong operand1, MpFloat operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Divide((nuint)operand1, operand2);
+
+        using MpFloat temp = operand1;
+        return Divide(temp, operand2);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpFloat result, MpFloat operand1, long operand2)
@@ -448,12 +572,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Divide(ref result, operand1, (nint)operand2);
         else
-            Divide(ref result, operand1, (MpFloat)operand2);
+        {
+            using MpFloat temp = operand2;
+            Divide(ref result, operand1, temp);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Divide(MpFloat operand1, long operand2) =>
-        IntPtr.Size == 8 ? Divide(operand1, (nint)operand2) : Divide(operand1, (MpFloat)operand2);
+    public static MpFloat Divide(MpFloat operand1, long operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Divide(operand1, (nint)operand2);
+
+        using MpFloat temp = operand2;
+        return Divide(operand1, temp);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpFloat result, long operand1, MpFloat operand2)
@@ -461,12 +594,21 @@ partial struct MpFloat
         if (IntPtr.Size == 8)
             Divide(ref result, (nint)operand1, operand2);
         else
-            Divide(ref result, (MpFloat)operand1, operand2);
+        {
+            using MpFloat temp = operand1;
+            Divide(ref result, temp, operand2);
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static MpFloat Divide(long operand1, MpFloat operand2) =>
-        IntPtr.Size == 8 ? Divide((nint)operand1, operand2) : Divide((MpFloat)operand1, operand2);
+    public static MpFloat Divide(long operand1, MpFloat operand2)
+    {
+        if (IntPtr.Size == 8)
+            return Divide((nint)operand1, operand2);
+
+        using MpFloat temp = operand1;
+        return Divide(temp, operand2);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Sqrt(ref MpFloat result, MpFloat operand) =>

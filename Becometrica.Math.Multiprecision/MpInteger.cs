@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Numerics;
+using System.Runtime.CompilerServices;
 using Becometrica.Math.Interop;
 
 namespace Becometrica.Math;
@@ -25,6 +26,13 @@ public partial struct MpInteger: IEquatable<MpInteger>, IComparable<MpInteger>, 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public MpInteger(ulong value) => _z = new(value);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public MpInteger(BigInteger value)
+    {
+        _z = default;
+        Set(value);
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public MpInteger(double value) => _z = new(value);
@@ -76,6 +84,9 @@ public partial struct MpInteger: IEquatable<MpInteger>, IComparable<MpInteger>, 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static implicit operator MpInteger(ulong a) => new(a);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static implicit operator MpInteger(BigInteger a) => new(a);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static explicit operator MpInteger(double a) => new(a);

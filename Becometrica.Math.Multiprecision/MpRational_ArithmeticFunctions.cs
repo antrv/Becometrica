@@ -6,11 +6,8 @@ namespace Becometrica.Math;
 partial struct MpRational
 {
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Negate(ref MpRational result, MpRational operand)
-    {
-        result._q ??= new();
-        Mpir.mpq_neg(ref result._q.Value, operand.Q);
-    }
+    public static void Negate(ref MpRational result, MpRational operand) =>
+        Mpir.mpq_neg(ref (result._q ??= new()).Value, operand.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Negate(MpRational operand)
@@ -21,11 +18,8 @@ partial struct MpRational
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Abs(ref MpRational result, MpRational operand)
-    {
-        result._q ??= new();
-        Mpir.mpq_abs(ref result._q.Value, operand.Q);
-    }
+    public static void Abs(ref MpRational result, MpRational operand) =>
+        Mpir.mpq_abs(ref (result._q ??= new()).Value, operand.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Abs(MpRational operand)
@@ -36,11 +30,8 @@ partial struct MpRational
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Add(ref MpRational result, MpRational operand1, MpRational operand2)
-    {
-        result._q ??= new();
-        Mpir.mpq_add(ref result._q.Value, operand1.Q, operand2.Q);
-    }
+    public static void Add(ref MpRational result, MpRational operand1, MpRational operand2) =>
+        Mpir.mpq_add(ref (result._q ??= new()).Value, operand1.Q, operand2.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Add(MpRational operand1, MpRational operand2)
@@ -51,11 +42,8 @@ partial struct MpRational
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Subtract(ref MpRational result, MpRational operand1, MpRational operand2)
-    {
-        result._q ??= new();
-        Mpir.mpq_sub(ref result._q.Value, operand1.Q, operand2.Q);
-    }
+    public static void Subtract(ref MpRational result, MpRational operand1, MpRational operand2) =>
+        Mpir.mpq_sub(ref (result._q ??= new()).Value, operand1.Q, operand2.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Subtract(MpRational operand1, MpRational operand2)
@@ -66,11 +54,8 @@ partial struct MpRational
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Multiply(ref MpRational result, MpRational operand1, MpRational operand2)
-    {
-        result._q ??= new();
-        Mpir.mpq_mul(ref result._q.Value, operand1.Q, operand2.Q);
-    }
+    public static void Multiply(ref MpRational result, MpRational operand1, MpRational operand2) =>
+        Mpir.mpq_mul(ref (result._q ??= new()).Value, operand1.Q, operand2.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Multiply(MpRational operand1, MpRational operand2)
@@ -85,11 +70,8 @@ partial struct MpRational
         Multiply2Exp(ref result, operand, (nuint)exponent);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Multiply2Exp(ref MpRational result, MpRational operand, nuint exponent)
-    {
-        result._q ??= new();
-        Mpir.mpq_mul_2exp(ref result._q.Value, operand.Q, exponent);
-    }
+    public static void Multiply2Exp(ref MpRational result, MpRational operand, nuint exponent) =>
+        Mpir.mpq_mul_2exp(ref (result._q ??= new()).Value, operand.Q, exponent);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Multiply2Exp(MpRational operand, uint exponent) => Multiply2Exp(operand, (nuint)exponent);
@@ -103,11 +85,8 @@ partial struct MpRational
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Divide(ref MpRational result, MpRational operand1, MpRational operand2)
-    {
-        result._q ??= new();
-        Mpir.mpq_div(ref result._q.Value, operand1.Q, operand2.Q);
-    }
+    public static void Divide(ref MpRational result, MpRational operand1, MpRational operand2) =>
+        Mpir.mpq_div(ref (result._q ??= new()).Value, operand1.Q, operand2.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Divide(MpRational operand1, MpRational operand2)
@@ -122,11 +101,8 @@ partial struct MpRational
         Divide2Exp(ref result, operand, (nuint)exponent);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Divide2Exp(ref MpRational result, MpRational operand, nuint exponent)
-    {
-        result._q ??= new();
-        Mpir.mpq_div_2exp(ref result._q.Value, operand.Q, exponent);
-    }
+    public static void Divide2Exp(ref MpRational result, MpRational operand, nuint exponent) =>
+        Mpir.mpq_div_2exp(ref (result._q ??= new()).Value, operand.Q, exponent);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Divide2Exp(MpRational operand, uint exponent) => Divide2Exp(operand, (nuint)exponent);
@@ -140,11 +116,8 @@ partial struct MpRational
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Invert(ref MpRational result, MpRational operand)
-    {
-        result._q ??= new();
-        Mpir.mpq_inv(ref result._q.Value, operand.Q);
-    }
+    public static void Invert(ref MpRational result, MpRational operand) =>
+        Mpir.mpq_inv(ref (result._q ??= new()).Value, operand.Q);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpRational Invert(MpRational operand)

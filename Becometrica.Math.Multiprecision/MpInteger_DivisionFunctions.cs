@@ -249,6 +249,107 @@ partial struct MpInteger
         return Remainder(dividend, temp, rounding);
     }
 
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, MpInteger divisor,
+        DivisionRounding rounding)
+    {
+        switch (rounding)
+        {
+            case DivisionRounding.ToZero:
+                Mpir.mpz_tdiv_qr(ref (quotient._z ??= new()).Value, ref (remainder._z ??= new()).Value, dividend.Z,
+                    divisor.Z);
+
+                break;
+            case DivisionRounding.ToPositiveInfinity:
+                Mpir.mpz_cdiv_qr(ref (quotient._z ??= new()).Value, ref (remainder._z ??= new()).Value, dividend.Z,
+                    divisor.Z);
+
+                break;
+            case DivisionRounding.ToNegativeInfinity:
+                Mpir.mpz_fdiv_qr(ref (quotient._z ??= new()).Value, ref (remainder._z ??= new()).Value, dividend.Z,
+                    divisor.Z);
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(rounding));
+        }
+    }
+
+    public static (MpInteger Quotient, MpInteger Remainder) DivRem(MpInteger dividend, MpInteger divisor,
+        DivisionRounding rounding)
+    {
+        MpInteger quotient = default;
+        MpInteger remainder = default;
+        DivRem(ref quotient, ref remainder, dividend, divisor, rounding);
+        return (quotient, remainder);
+    }
+
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, int divisor,
+        DivisionRounding rounding) => DivRem(ref quotient, ref remainder, dividend, (nint)divisor, rounding);
+
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, nint divisor,
+        DivisionRounding rounding)
+    {
+        if (divisor >= 0)
+            DivRem(ref quotient, ref remainder, dividend, (nuint)divisor, rounding);
+        else
+        {
+            using MpInteger temp = divisor;
+            DivRem(ref quotient, ref remainder, dividend, temp, rounding);
+        }
+    }
+
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, long divisor,
+        DivisionRounding rounding)
+    {
+        if (IntPtr.Size == 8)
+            DivRem(ref quotient, ref remainder, dividend, (nint)divisor, rounding);
+        else
+        {
+            using MpInteger temp = divisor;
+            DivRem(ref quotient, ref remainder, dividend, temp, rounding);
+        }
+    }
+
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, uint divisor,
+        DivisionRounding rounding) => DivRem(ref quotient, ref remainder, dividend, (nuint)divisor, rounding);
+
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, nuint divisor,
+        DivisionRounding rounding)
+    {
+        switch (rounding)
+        {
+            case DivisionRounding.ToZero:
+                Mpir.mpz_tdiv_qr_ui(ref (quotient._z ??= new()).Value, ref (remainder._z ??= new()).Value, dividend.Z,
+                    divisor);
+
+                break;
+            case DivisionRounding.ToPositiveInfinity:
+                Mpir.mpz_cdiv_qr_ui(ref (quotient._z ??= new()).Value, ref (remainder._z ??= new()).Value, dividend.Z,
+                    divisor);
+
+                break;
+            case DivisionRounding.ToNegativeInfinity:
+                Mpir.mpz_fdiv_qr_ui(ref (quotient._z ??= new()).Value, ref (remainder._z ??= new()).Value, dividend.Z,
+                    divisor);
+
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(rounding));
+        }
+    }
+
+    public static void DivRem(ref MpInteger quotient, ref MpInteger remainder, MpInteger dividend, ulong divisor,
+        DivisionRounding rounding)
+    {
+        if (IntPtr.Size == 8)
+            DivRem(ref quotient, ref remainder, dividend, (nuint)divisor, rounding);
+        else
+        {
+            using MpInteger temp = divisor;
+            DivRem(ref quotient, ref remainder, dividend, temp, rounding);
+        }
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Divide(ref MpInteger result, MpInteger dividend, MpInteger divisor) =>
         Mpir.mpz_tdiv_q(ref (result._z ??= new()).Value, dividend.Z, divisor.Z);
