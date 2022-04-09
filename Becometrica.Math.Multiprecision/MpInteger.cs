@@ -4,7 +4,7 @@ using Becometrica.Math.Interop;
 
 namespace Becometrica.Math;
 
-public partial struct MpInteger: IEquatable<MpInteger>, IComparable<MpInteger>, IDisposable
+public partial struct MpInteger: IEquatable<MpInteger>, IComparable, IComparable<MpInteger>, IDisposable
 {
     private static readonly MpzGuard _zero = new();
     private MpzGuard? _z;

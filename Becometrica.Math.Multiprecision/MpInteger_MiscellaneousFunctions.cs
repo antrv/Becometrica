@@ -18,10 +18,29 @@ partial struct MpInteger
     public bool FitsInt32() => Mpir.mpz_fits_sint_p(Z) != 0;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool FitsUInt64() => Mpir.mpz_fits_ulong_p(Z) != 0;
+    public bool FitsUInt64()
+    {
+        if (IntPtr.Size == 8)
+            return Mpir.mpz_fits_ui_p(Z) != 0;
+
+        return Z.MpSize <= 2;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public bool FitsInt64() => Mpir.mpz_fits_slong_p(Z) != 0;
+    public bool FitsInt64()
+    {
+        if (IntPtr.Size == 8)
+            return Mpir.mpz_fits_si_p(Z) != 0;
+
+        ref readonly Mpz z = ref Z;
+        return z.MpSize switch
+        {
+            >= -1 and <= 1 => true,
+            -2 => z.MpD[1] <= 1 + (uint)int.MaxValue,
+            2 => z.MpD[1] <= int.MaxValue,
+            _ => false,
+        };
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool IsOdd() => Mpir.mpz_odd_p(Z);

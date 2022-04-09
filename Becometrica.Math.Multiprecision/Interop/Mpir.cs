@@ -1589,6 +1589,24 @@ internal static class Mpir
     /// </summary>
     /// <param name="op"></param>
     /// <returns></returns>
+    [DllImport(LibraryName, EntryPoint = Prefix + nameof(mpz_fits_ui_p))]
+    internal static extern int mpz_fits_ui_p(in Mpz op);
+
+    /// <summary>
+    /// Return non-zero iff the value of op fits in an unsigned long, long, unsigned int, signed
+    /// int, unsigned short int, or signed short int, respectively. Otherwise, return zero.
+    /// </summary>
+    /// <param name="op"></param>
+    /// <returns></returns>
+    [DllImport(LibraryName, EntryPoint = Prefix + nameof(mpz_fits_si_p))]
+    internal static extern int mpz_fits_si_p(in Mpz op);
+
+    /// <summary>
+    /// Return non-zero iff the value of op fits in an unsigned long, long, unsigned int, signed
+    /// int, unsigned short int, or signed short int, respectively. Otherwise, return zero.
+    /// </summary>
+    /// <param name="op"></param>
+    /// <returns></returns>
     [DllImport(LibraryName, EntryPoint = Prefix + nameof(mpz_fits_ulong_p))]
     internal static extern int mpz_fits_ulong_p(in Mpz op);
 

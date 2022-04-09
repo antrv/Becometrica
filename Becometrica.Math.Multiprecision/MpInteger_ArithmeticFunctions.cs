@@ -351,16 +351,8 @@ partial struct MpInteger
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Multiply(ref MpInteger result, MpInteger operand1, nint operand2)
-    {
-        if (operand2 >= 0)
-            Multiply(ref result, operand1, (nuint)operand2);
-        else
-        {
-            Multiply(ref result, operand1, (nuint)(-operand2));
-            Negate(ref result, result);
-        }
-    }
+    public static void Multiply(ref MpInteger result, MpInteger operand1, nint operand2) =>
+        Mpir.mpz_mul_si(ref (result._z ??= new()).Value, operand1.Z, operand2);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static MpInteger Multiply(MpInteger operand1, nint operand2)

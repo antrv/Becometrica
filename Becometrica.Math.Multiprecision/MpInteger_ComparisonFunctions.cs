@@ -342,6 +342,15 @@ partial struct MpInteger
     public override bool Equals(object? obj) => obj is MpInteger integer && integer == this;
 
     /// <inheritdoc />
+    public int CompareTo(object? obj)
+    {
+        if (obj is MpInteger i)
+            return CompareTo(i);
+
+        throw new ArgumentException("Argument must be " + nameof(MpInteger), nameof(obj));
+    }
+
+    /// <inheritdoc />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(MpInteger other) => other == this;
 

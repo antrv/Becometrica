@@ -327,6 +327,15 @@ partial struct MpRational
     public override bool Equals(object? obj) => obj is MpRational rational && Equals(this, rational);
 
     /// <inheritdoc />
+    public int CompareTo(object? obj)
+    {
+        if (obj is MpRational i)
+            return CompareTo(i);
+
+        throw new ArgumentException("Argument must be " + nameof(MpRational), nameof(obj));
+    }
+
+    /// <inheritdoc />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool Equals(MpRational other) => Equals(this, other);
 

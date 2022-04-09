@@ -137,4 +137,18 @@ public class MpIntegerTests
         sevenPow100Mp.ToBigInteger().Should().Be(sevenPow100);
         negativeSevenPow100Mp.ToBigInteger().Should().Be(negativeSevenPow100);
     }
+
+    [Fact]
+    public void ConversionFromLong()
+    {
+        // Act
+        MpInteger a = ulong.MaxValue;
+        MpInteger b = a + 1;
+
+        // Assert
+        a.FitsUInt64().Should().BeTrue();
+        a.ToUInt64().Should().Be(ulong.MaxValue);
+        b.FitsUInt64().Should().BeFalse();
+        b.ToUInt64().Should().Be(0UL);
+    }
 }

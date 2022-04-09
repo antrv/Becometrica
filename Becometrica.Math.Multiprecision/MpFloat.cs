@@ -3,7 +3,7 @@ using Becometrica.Math.Interop;
 
 namespace Becometrica.Math;
 
-public partial struct MpFloat: IEquatable<MpFloat>, IComparable<MpFloat>, IDisposable
+public partial struct MpFloat: IEquatable<MpFloat>, IComparable, IComparable<MpFloat>, IDisposable
 {
     private static readonly MpfGuard _zero = new();
     private MpfGuard? _f;

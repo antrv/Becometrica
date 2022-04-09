@@ -324,6 +324,15 @@ partial struct MpFloat
     public bool Equals(MpFloat other) => other == this;
 
     /// <inheritdoc />
+    public int CompareTo(object? obj)
+    {
+        if (obj is MpFloat i)
+            return CompareTo(i);
+
+        throw new ArgumentException("Argument must be " + nameof(MpFloat), nameof(obj));
+    }
+
+    /// <inheritdoc />
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int CompareTo(MpFloat other) => Compare(this, other);
 

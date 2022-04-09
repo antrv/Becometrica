@@ -3,7 +3,7 @@ using Becometrica.Math.Interop;
 
 namespace Becometrica.Math;
 
-public partial struct MpRational: IEquatable<MpRational>, IComparable<MpRational>, IDisposable
+public partial struct MpRational: IEquatable<MpRational>, IComparable, IComparable<MpRational>, IDisposable
 {
     private static readonly MpqGuard _zero = new();
     private MpqGuard? _q;
