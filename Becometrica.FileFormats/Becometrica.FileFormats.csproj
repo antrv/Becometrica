@@ -4,12 +4,15 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <Version>0.5.0</Version>
         <Authors>Anton Ryzhov</Authors>
         <PackageProjectUrl>https://github.com/antrv/Becometrica</PackageProjectUrl>
         <PackageLicenseUrl></PackageLicenseUrl>
         <RepositoryUrl>https://github.com/antrv/Becometrica</RepositoryUrl>
     </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Becometrica.Binary\Becometrica.Binary.csproj" />
+    </ItemGroup>
 
 </Project>

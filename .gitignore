@@ -1,3 +1,5 @@
 .idea
+.nuget
 bin
 obj
+*.user
