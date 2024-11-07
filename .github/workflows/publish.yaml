@@ -1,0 +1,33 @@
+﻿name: publish
+on:
+  workflow_dispatch: # Allow running the workflow manually from the GitHub UI
+  push:
+    tags:
+      - '*.*.*'
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: true
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Build
+        run: |
+          dotnet build -c Release
+          dotnet pack --no-restore --no-build -c Release -o .nuget
+          dotnet nuget push -s https://nuget.pkg.github.com/antrv/index.json -k ${{ secrets.PUBLISH_TOKEN }} .nuget/*.nupkg
