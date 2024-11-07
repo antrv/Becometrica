@@ -1,0 +1,7 @@
+<Project>
+    <PropertyGroup>
+        <Authors>Anton Ryzhov</Authors>
+        <PackageProjectUrl>https://github.com/antrv/Becometrica</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/antrv/Becometrica</RepositoryUrl>
+    </PropertyGroup>
+</Project>
