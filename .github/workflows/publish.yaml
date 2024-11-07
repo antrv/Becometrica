@@ -31,3 +31,4 @@ jobs:
           dotnet build -c Release
           dotnet pack --no-restore --no-build -c Release -o .nuget
           dotnet nuget push -s https://nuget.pkg.github.com/antrv/index.json -k ${{ secrets.PUBLISH_TOKEN }} .nuget/*.nupkg
+          dotnet nuget push -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_PUBLISH_TOKEN }} .nuget/*.nupkg
