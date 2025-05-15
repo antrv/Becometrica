@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents an unmanaged pointer to a zero-terminated string.
@@ -28,7 +28,7 @@ public readonly struct AnsiStringPtr: IStringPtr<AnsiStringPtr, byte>, IEquatabl
     public static unsafe implicit operator AnsiStringPtr(byte* ptr) => new(ptr);
     public static explicit operator AnsiStringPtr(Ptr<byte> ptr) => new(ptr);
     public static explicit operator AnsiStringPtr(ConstPtr<byte> ptr) => new(ptr);
-    public static implicit operator AnsiStringPtr(NullPtr ptr) => new(default(nint));
+    public static implicit operator AnsiStringPtr(NullPtr ptr) => new(0);
     public static explicit operator nint(AnsiStringPtr ptr) => ptr._ptr;
     public static explicit operator nuint(AnsiStringPtr ptr) => (nuint)ptr._ptr;
     public static explicit operator Ptr<byte>(AnsiStringPtr ptr) => new(ptr._ptr);
@@ -41,9 +41,9 @@ public readonly struct AnsiStringPtr: IStringPtr<AnsiStringPtr, byte>, IEquatabl
     public static bool operator ==(AnsiStringPtr left, AnsiStringPtr right) => left._ptr == right._ptr;
     public static bool operator !=(AnsiStringPtr left, AnsiStringPtr right) => left._ptr != right._ptr;
 
-    public static bool operator !(AnsiStringPtr ptr) => ptr._ptr == default;
-    public static bool operator false(AnsiStringPtr ptr) => ptr._ptr == default;
-    public static bool operator true(AnsiStringPtr ptr) => ptr._ptr != default;
+    public static bool operator !(AnsiStringPtr ptr) => ptr._ptr == 0;
+    public static bool operator false(AnsiStringPtr ptr) => ptr._ptr == 0;
+    public static bool operator true(AnsiStringPtr ptr) => ptr._ptr != 0;
 
     public override int GetHashCode() => (int)_ptr;
 

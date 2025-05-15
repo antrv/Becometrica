@@ -1,6 +1,4 @@
-﻿using Becometrica.Unsafe;
-
-namespace Becometrica.Interop.Clang;
+﻿namespace Becometrica.Interop.Clang;
 
 /**
  * Identifies a specific source location within a translation

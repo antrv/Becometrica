@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 public interface IPointerArithmetic<TSelf>
     where TSelf: IPointerArithmetic<TSelf>, IAdditionOperators<TSelf, int, TSelf>,

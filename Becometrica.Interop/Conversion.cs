@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 public static class Conversion
 {

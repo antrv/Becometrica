@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents an unmanaged pointer to a binary (BSTR) string.
@@ -28,7 +28,7 @@ public readonly struct BStringPtr: IStringPtr<BStringPtr, byte>, IEquatable<Ptr<
     public static unsafe implicit operator BStringPtr(byte* ptr) => new(ptr);
     public static explicit operator BStringPtr(Ptr<byte> ptr) => new(ptr);
     public static explicit operator BStringPtr(ConstPtr<byte> ptr) => new(ptr);
-    public static implicit operator BStringPtr(NullPtr ptr) => new(default(nint));
+    public static implicit operator BStringPtr(NullPtr ptr) => new(0);
     public static explicit operator nint(BStringPtr ptr) => ptr._ptr;
     public static explicit operator nuint(BStringPtr ptr) => (nuint)ptr._ptr;
     public static explicit operator Ptr<byte>(BStringPtr ptr) => new(ptr._ptr);

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents an unmanaged pointer to a UTF-8 encoded zero-terminated string.
@@ -28,14 +28,14 @@ public readonly struct Utf8StringPtr: IStringPtr<Utf8StringPtr, byte>, IEquatabl
     public static unsafe implicit operator Utf8StringPtr(byte* ptr) => new(ptr);
     public static explicit operator Utf8StringPtr(Ptr<byte> ptr) => new(ptr);
     public static explicit operator Utf8StringPtr(ConstPtr<byte> ptr) => new(ptr);
-    public static implicit operator Utf8StringPtr(NullPtr ptr) => new(default(nint));
+    public static implicit operator Utf8StringPtr(NullPtr ptr) => new(0);
     public static explicit operator nint(Utf8StringPtr ptr) => ptr._ptr;
     public static explicit operator nuint(Utf8StringPtr ptr) => (nuint)ptr._ptr;
     public static explicit operator Ptr<byte>(Utf8StringPtr ptr) => new(ptr._ptr);
     public static implicit operator ConstPtr<byte>(Utf8StringPtr ptr) => new(ptr._ptr);
     public static explicit operator string?(Utf8StringPtr ptr) => Marshal.PtrToStringUTF8(ptr._ptr);
 
-    public bool IsNull => _ptr == default;
+    public bool IsNull => _ptr == 0;
     public static Utf8StringPtr Null => default;
 
     public static bool operator ==(Utf8StringPtr left, Utf8StringPtr right) => left._ptr == right._ptr;

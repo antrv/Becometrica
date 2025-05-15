@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using Becometrica.Interop.WinApi.Types;
-using Becometrica.Unsafe;
 
 namespace Becometrica.Interop.WinApi.Opengl32;
 

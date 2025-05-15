@@ -1,6 +1,4 @@
-﻿using Becometrica.Unsafe;
-
-namespace Becometrica.Interop.Clang;
+﻿namespace Becometrica.Interop.Clang;
 
 public struct CXStringSet
 {

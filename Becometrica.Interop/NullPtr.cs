@@ -1,4 +1,4 @@
-﻿namespace Becometrica.Unsafe;
+﻿namespace Becometrica.Interop;
 
 /// <summary>
 /// The pointer type representing null pointer. Implicitly convertible to any other pointer type.

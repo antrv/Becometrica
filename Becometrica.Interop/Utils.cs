@@ -1,4 +1,4 @@
-﻿namespace Becometrica.Unsafe;
+﻿namespace Becometrica.Interop;
 
 internal static class Utils
 {

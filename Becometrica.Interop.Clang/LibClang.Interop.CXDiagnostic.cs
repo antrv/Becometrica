@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using Becometrica.Unsafe;
 
 namespace Becometrica.Interop.Clang;
 

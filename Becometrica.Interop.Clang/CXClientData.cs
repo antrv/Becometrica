@@ -1,6 +1,4 @@
-﻿using Becometrica.Unsafe;
-
-namespace Becometrica.Interop.Clang;
+﻿namespace Becometrica.Interop.Clang;
 
 /**
  * Opaque pointer representing client data that will be passed through

@@ -1,6 +1,4 @@
-﻿using Becometrica.Unsafe;
-
-namespace Becometrica.Interop.Clang;
+﻿namespace Becometrica.Interop.Clang;
 
 /**
  * Provides the contents of a file that has not yet been saved to disk.

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents an unmanaged pointer to an unmanaged function.
@@ -24,7 +24,7 @@ public readonly struct FuncPtr<TResult>: IFuncPtr<FuncPtr<TResult>, TResult>
     public static explicit operator FuncPtr<TResult>(nint ptr) => new(ptr);
     public static explicit operator FuncPtr<TResult>(nuint ptr) => new(ptr);
     public static unsafe explicit operator FuncPtr<TResult>(delegate*<TResult> ptr) => new(ptr);
-    public static implicit operator FuncPtr<TResult>(NullPtr ptr) => new(default(nint));
+    public static implicit operator FuncPtr<TResult>(NullPtr ptr) => new(0);
     public static unsafe explicit operator nint(FuncPtr<TResult> ptr) => (nint)ptr._ptr;
     public static unsafe explicit operator nuint(FuncPtr<TResult> ptr) => (nuint)ptr._ptr;
     public static unsafe explicit operator delegate*<TResult>(FuncPtr<TResult> ptr) => ptr._ptr;
@@ -92,7 +92,7 @@ public readonly struct FuncPtr<TArg, TResult>: IFuncPtr<FuncPtr<TArg, TResult>, 
     public static explicit operator FuncPtr<TArg, TResult>(nint ptr) => new(ptr);
     public static explicit operator FuncPtr<TArg, TResult>(nuint ptr) => new(ptr);
     public static unsafe explicit operator FuncPtr<TArg, TResult>(delegate*<TArg, TResult> ptr) => new(ptr);
-    public static implicit operator FuncPtr<TArg, TResult>(NullPtr ptr) => new(default(nint));
+    public static implicit operator FuncPtr<TArg, TResult>(NullPtr ptr) => new(0);
     public static unsafe explicit operator nint(FuncPtr<TArg, TResult> ptr) => (nint)ptr._ptr;
     public static unsafe explicit operator nuint(FuncPtr<TArg, TResult> ptr) => (nuint)ptr._ptr;
     public static unsafe explicit operator delegate*<TArg, TResult>(FuncPtr<TArg, TResult> ptr) => ptr._ptr;
@@ -165,7 +165,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TResult>: IFuncPtr<FuncPtr<TArg1, T
     public static unsafe explicit operator FuncPtr<TArg1, TArg2, TResult>(delegate*<TArg1, TArg2, TResult> ptr) =>
         new(ptr);
 
-    public static implicit operator FuncPtr<TArg1, TArg2, TResult>(NullPtr ptr) => new(default(nint));
+    public static implicit operator FuncPtr<TArg1, TArg2, TResult>(NullPtr ptr) => new(0);
 
     public static unsafe explicit operator nint(FuncPtr<TArg1, TArg2, TResult> ptr) => (nint)ptr._ptr;
     public static unsafe explicit operator nuint(FuncPtr<TArg1, TArg2, TResult> ptr) => (nuint)ptr._ptr;
@@ -246,7 +246,7 @@ public readonly struct
     public static unsafe explicit operator FuncPtr<TArg1, TArg2, TArg3, TResult>(
         delegate*<TArg1, TArg2, TArg3, TResult> ptr) => new(ptr);
 
-    public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TResult>(NullPtr ptr) => new(default(nint));
+    public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TResult>(NullPtr ptr) => new(0);
 
     public static unsafe explicit operator nint(FuncPtr<TArg1, TArg2, TArg3, TResult> ptr) => (nint)ptr._ptr;
     public static unsafe explicit operator nuint(FuncPtr<TArg1, TArg2, TArg3, TResult> ptr) => (nuint)ptr._ptr;
@@ -342,7 +342,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TResult>:
     public static unsafe explicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TResult>(
         delegate*<TArg1, TArg2, TArg3, TArg4, TResult> ptr) => new(ptr);
 
-    public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TResult>(NullPtr ptr) => new(default(nint));
+    public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TResult>(NullPtr ptr) => new(0);
 
     public static unsafe explicit operator nint(FuncPtr<TArg1, TArg2, TArg3, TArg4, TResult> ptr) => (nint)ptr._ptr;
     public static unsafe explicit operator nuint(FuncPtr<TArg1, TArg2, TArg3, TArg4, TResult> ptr) => (nuint)ptr._ptr;
@@ -428,7 +428,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TResult>:
         delegate*<TArg1, TArg2, TArg3, TArg4, TArg5, TResult> ptr) => new(ptr);
 
     public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TResult>(NullPtr ptr)
-        => new(default(nint));
+        => new(0);
 
     public static unsafe explicit operator nint(FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TResult> ptr) =>
         (nint)ptr._ptr;
@@ -525,8 +525,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult
     public static unsafe explicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult>(
         delegate*<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult> ptr) => new(ptr);
 
-    public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult>(NullPtr ptr)
-        => new(default(nint));
+    public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult>(NullPtr ptr) => new(0);
 
     public static unsafe explicit operator nint(FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TResult> ptr) =>
         (nint)ptr._ptr;
@@ -622,7 +621,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, 
         delegate*<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult> ptr) => new(ptr);
 
     public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult>(NullPtr ptr)
-        => new(default(nint));
+        => new(0);
 
     public static explicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TResult>(nint ptr) =>
         new(ptr);
@@ -747,7 +746,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, 
         delegate*<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> ptr) => new(ptr);
 
     public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult>(
-        NullPtr ptr) => new(default(nint));
+        NullPtr ptr) => new(0);
 
     public static unsafe explicit operator
         nint(FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TResult> ptr) => (nint)ptr._ptr;
@@ -857,7 +856,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, 
         delegate*<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult> ptr) => new(ptr);
 
     public static implicit operator FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult>(
-        NullPtr ptr) => new(default(nint));
+        NullPtr ptr) => new(0);
 
     public static explicit operator
         FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TResult>(nint ptr) => new(ptr);
@@ -993,8 +992,7 @@ public readonly struct FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, 
             delegate*<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> ptr) => new(ptr);
 
     public static implicit operator
-        FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult>(NullPtr ptr)
-        => new(default(nint));
+        FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult>(NullPtr ptr) => new(0);
 
     public static unsafe explicit operator nint(
         FuncPtr<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TArg9, TArg10, TResult> ptr) => (nint)ptr._ptr;

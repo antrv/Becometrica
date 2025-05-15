@@ -1,4 +1,4 @@
-﻿namespace Becometrica.Unsafe;
+﻿namespace Becometrica.Interop;
 
 public interface IFuncPtr<TSelf, out TResult>: IPtr<TSelf>
     where TSelf: unmanaged, IFuncPtr<TSelf, TResult>

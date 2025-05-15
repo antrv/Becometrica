@@ -1,4 +1,4 @@
-﻿namespace Becometrica.Unsafe;
+﻿namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents an unmanaged pointer to an unmanaged structure.

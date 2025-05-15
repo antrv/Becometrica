@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 public interface INullPtr<TSelf>: IEquatable<TSelf>, IPtr,
     IEqualityOperators<TSelf, TSelf, bool>

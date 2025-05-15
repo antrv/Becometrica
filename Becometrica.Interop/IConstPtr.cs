@@ -1,4 +1,4 @@
-﻿namespace Becometrica.Unsafe;
+﻿namespace Becometrica.Interop;
 
 public interface IConstPtr<TSelf, T>: IPtr<TSelf, T>
     where TSelf: unmanaged, IConstPtr<TSelf, T>

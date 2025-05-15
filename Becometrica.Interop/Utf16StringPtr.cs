@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Becometrica.Unsafe;
+namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents an unmanaged pointer to a UTF-16 encoded zero-terminated string.
@@ -28,7 +28,7 @@ public readonly struct Utf16StringPtr: IStringPtr<Utf16StringPtr, char>, IEquata
     public static unsafe implicit operator Utf16StringPtr(char* ptr) => new(ptr);
     public static explicit operator Utf16StringPtr(Ptr<char> ptr) => new(ptr);
     public static explicit operator Utf16StringPtr(ConstPtr<char> ptr) => new(ptr);
-    public static implicit operator Utf16StringPtr(NullPtr ptr) => new(default(nint));
+    public static implicit operator Utf16StringPtr(NullPtr ptr) => new(0);
     public static explicit operator nint(Utf16StringPtr ptr) => ptr._ptr;
     public static explicit operator nuint(Utf16StringPtr ptr) => (nuint)ptr._ptr;
     public static explicit operator Ptr<char>(Utf16StringPtr ptr) => new(ptr._ptr);

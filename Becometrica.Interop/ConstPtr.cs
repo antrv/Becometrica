@@ -1,4 +1,6 @@
-﻿namespace Becometrica.Unsafe;
+﻿using System.Runtime.CompilerServices;
+
+namespace Becometrica.Interop;
 
 /// <summary>
 /// The structure represents a constant unmanaged pointer to an unmanaged structure.
@@ -14,10 +16,7 @@ public readonly struct ConstPtr<T>: IConstPtr<ConstPtr<T>, T>, IEquatable<nint>,
     public unsafe ConstPtr(nint ptr) => _ptr = (T*)ptr;
     public unsafe ConstPtr(nuint ptr) => _ptr = (T*)ptr;
     public unsafe ConstPtr(T* ptr) => _ptr = ptr;
-
-    public unsafe ConstPtr(ref readonly T ptr) => _ptr =
-        (T*)System.Runtime.CompilerServices.Unsafe.AsPointer(ref System.Runtime.CompilerServices.Unsafe.AsRef(in ptr));
-
+    public unsafe ConstPtr(ref readonly T ptr) => _ptr = (T*)Unsafe.AsPointer(ref Unsafe.AsRef(in ptr));
     public unsafe ConstPtr(Ptr<T> ptr) => _ptr = ptr.Pointer;
 
     public static ConstPtr<T> Create(nint ptr) => new(ptr);
