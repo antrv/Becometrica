@@ -1,0 +1,17 @@
+﻿<Solution>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github\workflows\publish.yaml" />
+  </Folder>
+  <Folder Name="/Examples/">
+    <Project Path="Examples\Becometrica.Interop.WinApi.Example\Becometrica.Interop.WinApi.Example.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests\Becometrica.FileFormats.Tests\Becometrica.FileFormats.Tests.csproj" Type="Classic C#" />
+  </Folder>
+  <Project Path="Becometrica.Binary\Becometrica.Binary.csproj" Type="Classic C#" />
+  <Project Path="Becometrica.FileFormats\Becometrica.FileFormats.csproj" Type="Classic C#" />
+  <Project Path="Becometrica.Interop.Clang\Becometrica.Interop.Clang.csproj" Type="Classic C#" />
+  <Project Path="Becometrica.Interop.WinApi\Becometrica.Interop.WinApi.csproj" Type="Classic C#" />
+  <Project Path="Becometrica.Interop\Becometrica.Interop.csproj" Type="Classic C#" />
+</Solution>
